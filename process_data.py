@@ -2,12 +2,13 @@ import sys
 import pandas as pd
 from sqlalchemy import create_engine
 
-def load_data(messages_filepath, categories_filepath):
-    '''
+
+def load_data(messages_file_path, categories_file_path):
+    """
     loads data from two files and merges them via left join based on ID column
-    '''
-    messages = pd.read_csv(messages_filepath, index_col='id')
-    categories = pd.read_csv(categories_filepath, index_col='id')
+    """
+    messages = pd.read_csv(messages_file_path, index_col='id')
+    categories = pd.read_csv(categories_file_path, index_col='id')
     df = pd.DataFrame(messages).join(pd.DataFrame(categories), how='left')
     return df
 
