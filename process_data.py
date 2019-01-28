@@ -5,8 +5,14 @@ from sqlalchemy import create_engine
 
 def load_data(messages_file_path, categories_file_path):
     """
-    loads data from two files and merges them via left join based on ID column
+    This function loads data from two files and merges them via left join based on ID column
+    Input:
+        message_file_path: full file path to CSV file containing messages
+        categories_file_pat: full file path to CSV file containing categories
+    Output:
+        df: data frame containing joined content from the two inputs
     """
+
     messages = pd.read_csv(messages_file_path, index_col='id')
     categories = pd.read_csv(categories_file_path, index_col='id')
     df = pd.DataFrame(messages).join(pd.DataFrame(categories), how='left')
@@ -14,6 +20,14 @@ def load_data(messages_file_path, categories_file_path):
 
 
 def clean_data(df):
+    """
+    This function cleans the data frame by splitting columns, cleaning text, and removing duplicates
+    Input:
+        df: data frame to be cleaned
+    Output:
+        df: cleaned data frame
+    """
+
     # create a dataframe of the 36 individual category columns
     categories = df.categories.str.split(';', expand=True)
     
@@ -45,6 +59,14 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """"
+    Save a data frame into an SQLite database
+    Input:
+        df: data to be saved
+        database_filename: full path to database
+    Output:
+        none
+    """
     engine = create_engine('sqlite:///'+database_filename)
     df.to_sql('Messages', engine, index=False, if_exists='replace')
 
