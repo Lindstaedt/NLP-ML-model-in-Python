@@ -45,7 +45,7 @@ def clean_data(df):
     for column in categories:
         # set each value to be the last character of the string
         categories[column] = categories[column].str.extract('(\d)').astype(int)
-
+        categories[column] = categories[column].replace(2, 1)
     # drop the original categories column from `df`
     df.drop('categories', axis=1, inplace=True)
     
