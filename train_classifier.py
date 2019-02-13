@@ -6,11 +6,26 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
-    pass
+    # normalize case and remove punctuation
+    text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
+
+    # tokenize text
+    tokens = word_tokenize(text)
+
+    # build multi-language list of stop words
+    stop_words = [*stopwords.words("english"),
+                  *stopwords.words("french"),
+                  *stopwords.words("spanish")]
+
+    # lemmatize andremove stop words
+    lemmatizer = WordNetLemmatizer()
+    tokens = [lemmatizer.lemmatize(word).strip() for word in tokens if word not in stop_words]
+
+    return tokens
 
 
 def build_model():
-    pass
+    return model
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
@@ -18,8 +33,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
-    pass
-
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 def main():
     if len(sys.argv) == 3:
