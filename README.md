@@ -8,15 +8,13 @@ plotly, nltk, json, and pickle.
 This project is part of my completion of the Udacity Data Science Nanodegree.
 The goal is to build a system consisting of two main components:
 
-####1) ETL pipeline and ML model 
+###1) ETL pipeline and ML model 
 Building an ETL pipeline, storing data in a database, 
 training an NLP ML model and then using a grid search to find the best model.
 
-####2) Web frontend built that uses the trained ML model to categorize text
+###2) Web frontend built that uses the trained ML model to categorize text
 The front end is built with Flask. The web front end runs the ML model to 
 categorize user input text. 
-
-The tool uses a .
 
 ## File Descriptions
 - data folder:
