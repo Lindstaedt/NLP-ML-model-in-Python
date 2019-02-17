@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 
 def load_data(messages_file_path, categories_file_path):
     """
-    This function loads data from two files and merges them via left join based on ID column
+    This function loads data from two files and merges them via left join based on the column called "ID"
     Input:
         message_file_path: full file path to CSV file containing messages
         categories_file_pat: full file path to CSV file containing categories
@@ -60,12 +60,12 @@ def clean_data(df):
 
 def save_data(df, database_filename):
     """"
-    Save a data frame into an SQLite database
+    Save a data frame into an SQLite database. The table name in the database will be "Messages"
     Input:
         df: data to be saved
         database_filename: full path to database
     Output:
-        none
+        none; saved file is generated
     """
     engine = create_engine('sqlite:///'+database_filename)
     df.to_sql('Messages', engine, index=False, if_exists='replace')
